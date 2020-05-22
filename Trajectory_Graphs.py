@@ -19,11 +19,21 @@ a = (-9.8/2)*x*x + (u*np.sin(A))*x
 
 plt.figure(1)
 plt.plot(x, y)
+plt.figure(1).suptitle('Range vs Time Graph', fontsize=20)
+plt.xlabel('Time', fontsize=16)
+plt.ylabel('Range', fontsize=16)
 
 plt.figure(2)
 plt.plot(x, a)
+plt.figure(2).suptitle('Height vs Time Graph', fontsize=20)
+plt.xlabel('Time', fontsize=16)
+plt.ylabel('Height', fontsize=16)
 
 plt.figure(3)
 plt.plot(y, a)
+plt.figure(3).suptitle('Height vs Range Graph', fontsize=20)
+plt.xlabel('Range', fontsize=16)
+plt.ylabel('Height', fontsize=16)
 
 plt.show() 
+         
