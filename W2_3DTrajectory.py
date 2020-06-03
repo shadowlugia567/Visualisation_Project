@@ -13,7 +13,7 @@ dt=0.0001
 s.velocity.x = u*cos(A)
 s.velocity.y = u*sin(A)
 while(t<=time):
-    rate(1000)
+    rate(10000)
     
     s.pos.x = s.pos.x+s.velocity.x*dt
     s.velocity.y =s.velocity.y+(-9.8)*dt
