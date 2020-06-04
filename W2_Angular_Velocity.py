@@ -14,14 +14,14 @@ o.velocity=vector(0,0,0)
 
 time=(2*u*sin(A))/9.8 
 t=0
-dt=0.0000001
+dt=0.00001
 
 s.velocity.x = u*cos(A)
 s.velocity.y = u*sin(A)
 
 
 while(t<=time):
-    rate(10000000)
+    rate(100000)
     
     s.pos.x = s.pos.x+s.velocity.x*dt
     s.velocity.y =s.velocity.y+(-9.8)*dt
