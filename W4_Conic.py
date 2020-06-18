@@ -25,6 +25,8 @@ e = (1+(2*E*L**2/((m**3)*(mu**2))))**0.5
 
 print("The eccentricity is",e)
 print("Semilatus rectum is",p)
+print("The energy is",E)
+print("The angular momentum is",m)
 
 if(e > 1):
     print("The orbit's shape is hyperbolic")
