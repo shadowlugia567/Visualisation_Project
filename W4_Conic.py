@@ -6,22 +6,22 @@ G=6.673*(10**-11)
 
 M = float(input('Enter the mass of the bigger body: '))
 m = float(input('Enter the mass of the smaller body: '))
-r = float(input('Enter the periapsis in m: '))
-v = float(input('Enter the v in m/s: '))
+rp = float(input('Enter the periapsis in m: '))
+vp = float(input('Enter the v in m/s: '))
 
 """ #Data for testing. Using the Sun and the Earth.
 m=5972000000000000000000000
 M=1989000000000000000000000000000
-r=147100000000
-v=30290"""
+rp=147100000000
+vp=30290"""
 
-E = (0.5*m*v**2) - ((G*M*m)/r)
-L = m*r*v
+E = (0.5*m*vp**2) - ((G*M*m)/rp)
+L = m*rp*vp
 mu = G*(m+M)
 h = L/m
 p = (h**2)/mu
 
-e = (1+(2*E*L**2/((m**3)*(mu**2))))**0.5
+e = (p/rp) - 1
 
 print("The eccentricity is",e)
 print("Semilatus rectum is",p)
