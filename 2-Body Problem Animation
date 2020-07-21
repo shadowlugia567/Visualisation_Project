@@ -1,0 +1,114 @@
+import matplotlib.pyplot as plt 
+from vpython import *
+import numpy as np 
+
+scene= canvas()
+s=sphere (pos=(vector(0,0,0)), radius=4500000000)
+
+G=6.673*(10**-11)
+
+M = float(input('Enter the mass of the bigger body: '))
+m = float(input('Enter the mass of the smaller body: '))
+rp = float(input('Enter the periapsis in m: '))
+vp = float(input('Enter the v in m/s: '))
+
+E = (0.5*m*vp**2) - ((G*M*m)/rp)
+L = m*rp*vp
+mu = G*(m+M)
+h = L/m
+p = (h**2)/mu
+
+e = (p/rp) - 1
+
+
+semimajor = p/(1-(e**2))
+
+P = 2*np.pi*(((abs(semimajor)**3)/mu)**0.5) 
+print("The eccentricity is",e)
+print("Semilatus rectum is",p, "metres")
+print("The energy is",E,"Joules")
+print("The angular momentum is",m,"kgm^2/s")
+print(" The period of the orbit is",P,"seconds")
+
+cos = np.cos
+sin = np.sin
+pi = np.pi
+
+if((e > 0 and e < 1) or e == 0):
+    
+    if(e > 0 and e < 1):
+        print("The orbit's shape is elliptical")
+    
+    if(e == 0):
+        print("The orbit's shape is circular")
+        
+    theta = np.linspace(0,2*pi, 360)
+    r = p/(1+e*cos(theta))
+
+    plt.polar(theta, r)
+    plt.polar(0,0,'ro')
+
+    t=0
+    dt = (P/360) 
+
+    plt.figure(2)
+    plt.plot(r*cos(theta), r*sin(theta))
+    plt.plot(0,0, 'ro')
+
+    plt.show()
+
+    theta = 0
+    r = p/(1+e*cos(theta))
+    dtheta = (h/(r**2))*dt
+    
+    o=sphere (pos=(vector(r*cos(theta), r*sin(theta),0)), radius=3000000000, make_trail=True, retain=50000000)
+    while(t<=(4*P)):
+        rate(18)
+         
+        o.pos.x = r*cos(theta) 
+        o.pos.y = r*sin(theta)
+    
+        dtheta = (h/(r**2))*dt
+        theta+=dtheta    
+     
+        r = p/(1+e*cos(theta))
+        v=((2/m)*(E+(G*m*M/r)))**0.5
+    
+        t+=dt
+
+if(e == 1 or e > 1):
+    if(e == 1):
+        print("The orbit's shape is parabolic")
+    if(e > 1):
+        print("The orbit's shape is hyperbolic")
+    
+    tasym = np.arccos(-1/e)
+    theta = np.linspace((-tasym+0.2),(tasym-0.2), 1000)
+    r = p/(1+e*cos(theta))
+
+    plt.polar(theta, r)
+    plt.polar(0,0,'ro')
+   
+
+    plt.figure(2)
+    plt.plot(r*cos(theta), r*sin(theta))
+    plt.plot(0,0, 'ro')
+
+    plt.show()  
+    
+    theta = -tasym+0.4
+    r = p/(1+e*cos(theta))
+    
+    dt= 0.05/(h/(rp**2))
+    
+    o=sphere (pos=(vector(r*cos(theta), r*sin(theta),0)), radius=3000000000, make_trail=True, retain=50000000)
+    while(theta <= tasym-0.4):
+        rate(18)
+         
+        o.pos.x = r*cos(theta) 
+        o.pos.y = r*sin(theta)
+    
+        dtheta = (h/(r**2))*dt
+        theta+=dtheta    
+     
+        r = p/(1+e*cos(theta))
